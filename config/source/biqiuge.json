@@ -1,0 +1,76 @@
+{
+  "SourcesCode": "biqiuge",
+  "SourcesName": "笔趣阁",
+  "Weburl": "",
+  "Searchurl": "http://www.biquge.info/modules/article/search.php?searchkey=",
+  "Charset": "GBK",
+  "Search": {
+    "Range": "table[class='grid'] tbody tr",
+    "Repair": {
+      "Field": "BookUrl",
+      "Position": "l",
+      "value": "http://www.biquge.info"
+    },
+    "Replace": {
+      "Field": "",
+      "Old": "",
+      "New": ""
+    },
+    "BookName": {
+      "Type": "text",
+      "Rule": "td[class='odd'] a",
+      "Filter": ""
+    },
+    "BookUrl": {
+      "Type": "href",
+      "Rule": "td[class='odd'] a",
+      "Filter": ""
+    },
+    "BookImg": {
+      "Type": "",
+      "Rule": "",
+      "Filter": ""
+    },
+    "BookAuthor": {
+      "Type": "text",
+      "Rule": "td[class='odd']:nth-child(3)",
+      "Filter": ""
+    },
+    "BookDescription": {
+      "Type": "text",
+      "Rule": "",
+      "Filter": ""
+    }
+  },
+  "Catalog": {
+    "Range": "div[class='box_con'] div dl dd",
+    "Repair": {
+      "Field": "Url",
+      "Position": "r",
+      "value": "FormURL"
+    },
+    "Title": {
+      "Type": "text",
+      "Rule": "a",
+      "Filter": ""
+    },
+    "Url": {
+      "Type": "href",
+      "Rule": "a",
+      "Filter": ""
+    }
+  },
+  "Article": {
+    "Range": "div[class='box_con']",
+    "Title": {
+      "Type": "text",
+      "Rule": "div[class='bookname'] h1",
+      "Filter": ""
+    },
+    "Doc": {
+      "Type": "text",
+      "Rule": "div[id='content']",
+      "Filter": "\\t|\\n"
+    }
+  }
+}

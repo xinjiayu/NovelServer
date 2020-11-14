@@ -1,0 +1,28 @@
+# HTTP Server
+[server]
+	Address     = ":8199"
+	ServerRoot  = "public"
+	ServerAgent = "NovelServer"
+    DumpRouterMap    = false #是否打印路由信息
+
+[logger]
+    path   = "./log"
+    level  = "ALL"
+    stdout = false
+    RotateExpire         = "1d"
+    RotateBackupLimit    = 1
+    RotateBackupExpire   = "7d"
+
+[system]
+    #小说源配置文件存放目录
+    sourceConfigPath = "./config/source"
+    #小说源配置文件的名称，如果为空就是全部，空：[] ，赋值例值["xxxx.json","xxxx.json"]
+    sourceFiles = ["com17k.json","biqiuge.json"]
+
+    #可访问IP白名单，如果为空就是允许全部，空：[] ，赋值例值["xxx.xxx.xxx.xxx","xxx.xxx.xxx.xxx"]
+    whitelist = []
+    #数据缓存时间，单位为分钟。缓存时间参数 = 0表示不过期， 值< 0表示立即过期， 值> 0表示超时过期。
+    DataCacheTime = 1
+
+    #api访问密钥，为空不启用密钥检查功能
+    SecretKey = ""

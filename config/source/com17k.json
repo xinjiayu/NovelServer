@@ -1,0 +1,68 @@
+{
+    "SourcesCode": "com17k",
+    "SourcesName": "17k小说网",
+    "Weburl": "https://www.17k.com",
+    "Searchurl": "http://search.17k.com/search.xhtml?c.st=0&c.q=",
+    "Charset": "UTF8",
+    "Search": {
+      "Range": "div[class='search-list'] div[class='textlist']",
+      "Replace": {
+        "Field": "BookUrl",
+        "Old": "book",
+        "New": "list"
+      },
+      "BookName": {
+        "Type": "alt",
+        "Rule": "div[class='textleft'] a img",
+        "Filter": ""
+      },
+      "BookUrl": {
+        "Type": "href",
+        "Rule": "div[class='textleft'] a",
+        "Filter": "//www.17k.com"
+      },
+      "BookImg": {
+        "Type": "src",
+        "Rule": "div[class='textleft'] a img",
+        "Filter": ""
+      },
+      "BookAuthor": {
+        "Type": "text",
+        "Rule": "div[class='textmiddle'] dl dd ul li span[class='ls']",
+        "Filter": "[作者：]|[\\s]"
+      },
+      "BookDescription": {
+        "Type": "text",
+        "Rule": "div[class='textmiddle'] dl dd ul li p",
+        "Filter": "\\s"
+      }
+    },
+    "Catalog": {
+      "Range": "div[class='Main List'] dl",
+      "NextFiltered": "dl",
+      "Find": "dd a",
+      "Title": {
+        "Type": "text",
+        "Rule": "span[class='ellipsis ']",
+        "Filter": "\\t|\\n"
+      },
+      "Url": {
+        "Type": "href",
+        "Rule": "",
+        "Filter": ""
+      }
+    },
+    "Article": {
+      "Range": "div[class='readAreaBox content']",
+      "Title": {
+        "Type": "text",
+        "Rule": "h1",
+        "Filter": ""
+      },
+      "Doc": {
+        "Type": "text",
+        "Rule": "div[class='p']",
+        "Filter": "\\t|\\n"
+      }
+    }
+}
