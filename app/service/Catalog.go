@@ -13,6 +13,9 @@ import (
 
 func (bs *BookService) BookCatalog(sourceCode, bookURL string) []model.BookCatalog {
 
+	//章节序号
+	ci := 0
+
 	//传统的URL是经过编码的需要解码
 	tmpURL, _ := base64.URLEncoding.DecodeString(bookURL)
 	bookURL = string(tmpURL)
@@ -46,7 +49,11 @@ func (bs *BookService) BookCatalog(sourceCode, bookURL string) []model.BookCatal
 			bookCatalog.Title = utils.NormFormat(bookCatalog.Title, config.Catalog.Title.Filter)
 			bookCatalog.Url = utils.NormFormat(bookCatalog.Url, config.Catalog.Url.Filter)
 
-			catalogListData = append(catalogListData, bookCatalog)
+			if bookCatalog.Title != "" {
+				ci++
+				bookCatalog.Chapter = ci
+				catalogListData = append(catalogListData, bookCatalog)
+			}
 		}
 
 		return catalogListData
@@ -62,6 +69,8 @@ func (bs *BookService) BookCatalog(sourceCode, bookURL string) []model.BookCatal
 		doc.Find(config.Catalog.DataRange).NextFiltered(config.Catalog.NextFiltered).Find(config.Catalog.Find).Each(func(i int, s *goquery.Selection) {
 			bookCatalog = bs.analysis(config, s)
 			if bookCatalog.Title != "" {
+				ci++
+				bookCatalog.Chapter = ci
 				catalogListData = append(catalogListData, bookCatalog)
 
 			}
@@ -72,6 +81,8 @@ func (bs *BookService) BookCatalog(sourceCode, bookURL string) []model.BookCatal
 
 			bookCatalog = bs.analysis(config, s)
 			if bookCatalog.Title != "" {
+				ci++
+				bookCatalog.Chapter = ci
 				catalogListData = append(catalogListData, bookCatalog)
 
 			}

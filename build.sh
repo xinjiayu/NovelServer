@@ -43,6 +43,7 @@ function copyFile() {
     rm -rf bin
     mkdir bin
     cp -r document/. bin/document/
+    cp -r public/. bin/public/
     cp -r config/. bin/config/
 }
 
