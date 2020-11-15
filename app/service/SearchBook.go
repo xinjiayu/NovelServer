@@ -108,3 +108,25 @@ func (bs *BookService) SearchBook(sourceCode, bookName string) []model.Book {
 
 	return bookList
 }
+
+//SearchBookByMultiSource 按名子搜索多个源
+func (bs *BookService) SearchBookByMultiSource(bookName, author string) map[string]model.Book {
+	bookId := bookName + "|" + author
+	bookId = base64.URLEncoding.EncodeToString([]byte(bookId))
+
+	var bookList = make(map[string]model.Book)
+
+	for _, config := range bs.SourceList {
+		glog.Info(config.SourcesCode)
+
+		dataList := bs.SearchBook(config.SourcesCode, bookName)
+		for _, book := range dataList {
+			if book.BookId == bookId {
+				bookList[config.SourcesCode] = book
+			}
+		}
+
+	}
+
+	return bookList
+}

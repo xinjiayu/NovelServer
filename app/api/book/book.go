@@ -40,3 +40,12 @@ func Article(r *ghttp.Request) {
 	data := bs.BookArticle(sourceCode, bookArticleUrl)
 	response.JsonExit(r, 0, "小说文章内容", data)
 }
+
+func BookSources(r *ghttp.Request) {
+	bookName := r.GetString("bookName")
+	author := r.GetString("author")
+
+	bs := service.NewSetupData()
+	data := bs.SearchBookByMultiSource(bookName, author)
+	response.JsonExit(r, 0, "小说搜索结果", data)
+}

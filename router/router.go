@@ -18,5 +18,7 @@ func init() {
 		group.GET("/catalog", book.Catalog)
 		group.GET("/article", book.Article)
 
+		group.GET("/booksources", book.BookSources)
+
 	})
 }
