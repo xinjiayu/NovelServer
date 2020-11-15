@@ -10,7 +10,6 @@ type SourceConfig struct {
 	SourcesCode string `json:"SourcesCode"`
 	SourcesName string `json:"SourcesName"`
 	Weburl      string `json:"Weburl"`
-	Searchurl   string `json:"Searchurl"`
 	Charset     string `json:"Charset"`
 	Search      `json:"Search"`
 	Catalog     `json:"Catalog"`
@@ -19,6 +18,7 @@ type SourceConfig struct {
 
 //Search 小说搜索配置
 type Search struct {
+	SearchUrl       string `json:"SearchUrl"`
 	DataRange       string `json:"Range"`
 	Replace         `json:"Replace"`
 	Repair          `json:"Repair"`
@@ -31,12 +31,15 @@ type Search struct {
 
 //Catalog 小说目录配置
 type Catalog struct {
-	DataRange    string `json:"Range"`
-	Repair       `json:"Repair"`
-	NextFiltered string    `json:"NextFiltered"`
-	Find         string    `json:"Find"`
-	Title        Attribute `json:"Title"`
-	Url          Attribute `json:"Url"`
+	DataType        string `json:"DataType"`
+	CatalogUrl      string `json:"CatalogUrl"`
+	CatalogUrlParam string `json:"CatalogUrlParam"`
+	DataRange       string `json:"Range"`
+	Repair          `json:"Repair"`
+	NextFiltered    string    `json:"NextFiltered"`
+	Find            string    `json:"Find"`
+	Title           Attribute `json:"Title"`
+	Url             Attribute `json:"Url"`
 }
 
 //Article 小说章节内容配置

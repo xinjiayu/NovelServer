@@ -5,6 +5,7 @@ import (
 	"NovelServer/library/utils"
 	"encoding/base64"
 	"github.com/PuerkitoBio/goquery"
+	"github.com/gogf/gf/os/glog"
 )
 
 func (bs *BookService) BookArticle(sourceCode, bookArticleURL string) model.BookArticle {
@@ -15,6 +16,7 @@ func (bs *BookService) BookArticle(sourceCode, bookArticleURL string) model.Book
 
 	config := new(model.SourceConfig)
 	config = bs.SourceConfigInfo[sourceCode]
+	glog.Info(bookArticleURL)
 	doc := getHtmlDoc(bookArticleURL)
 
 	var article model.BookArticle

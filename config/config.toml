@@ -17,7 +17,7 @@
     #小说源配置文件存放目录
     sourceConfigPath = "./config/source"
     #小说源配置文件的名称，如果为空就是全部，空：[] ，赋值例值["xxxx.json","xxxx.json"]
-    sourceFiles = ["com17k.json","biqiuge.json"]
+    sourceFiles = ["com17k.json","biqiuge.json","ttkan.json"]
 
     #可访问IP白名单，如果为空就是允许全部，空：[] ，赋值例值["xxx.xxx.xxx.xxx","xxx.xxx.xxx.xxx"]
     whitelist = []

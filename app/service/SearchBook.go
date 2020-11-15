@@ -5,6 +5,8 @@ import (
 	"NovelServer/library/utils"
 	"encoding/base64"
 	"github.com/PuerkitoBio/goquery"
+	"github.com/gogf/gf/os/glog"
+	"net/url"
 )
 
 //SearchBook 搜索小说
@@ -13,13 +15,19 @@ func (bs *BookService) SearchBook(sourceCode, bookName string) []model.Book {
 	config := new(model.SourceConfig)
 	config = bs.SourceConfigInfo[sourceCode]
 
-	url := config.Searchurl + bookName
-	doc := getHtmlDoc(url)
+	bookName = url.QueryEscape(bookName)
+	webUrl := config.SearchUrl + bookName
+
+	doc := getHtmlDoc(webUrl)
+	glog.Info("SourceCode:", config.SourcesCode, webUrl)
 
 	var bookList []model.Book
 	doc.Find(config.Search.DataRange).Each(func(i int, s *goquery.Selection) {
 
 		var book model.Book
+
+		//d,_:=s.Html()
+		//glog.Info(d)
 
 		if config.Search.BookName.Type == "text" {
 			book.BookName = s.Find(config.Search.BookName.Rule).Text()

@@ -167,3 +167,15 @@ autorestart=true
 > [作者：]|[\s]
 > ```
 
+
+**`Replace`** 替换配置，指定字段，进行替换
+
+Field,字段名称；Old，原来的内容；New，新的内容。
+```
+    "Replace": {
+      "Field": "BookUrl", 
+      "Old": "novel/chapters/",
+      "New": "api/nq/novel_id="
+    },
+
+```

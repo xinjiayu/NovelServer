@@ -1,0 +1,71 @@
+{
+  "SourcesCode": "ttkan",
+  "SourcesName": "天天看小说",
+  "Weburl": "https://www.ttkan.co",
+  "Charset": "UTF8",
+  "Search": {
+    "SearchUrl": "https://www.ttkan.co/novel/search?q=",
+    "Range": "div[class='frame_body'] div div",
+    "Replace": {
+      "Field": "BookUrl",
+      "Old": "novel/chapters/",
+      "New": "api/nq/amp_novel_chapters?language=cn&limit=100000&novel_id="
+    },
+    "BookName": {
+      "Type": "text",
+      "Rule": "ul li a h3",
+      "Filter": ""
+    },
+    "BookUrl": {
+      "Type": "href",
+      "Rule": "ul li a",
+      "Filter": ""
+    },
+    "BookImg": {
+      "Type": "src",
+      "Rule": "a amp-img",
+      "Filter": ""
+    },
+    "BookAuthor": {
+      "Type": "text",
+      "Rule": "ul li:nth-child(2)",
+      "Filter": "[作者：]"
+    },
+    "BookDescription": {
+      "Type": "text",
+      "Rule": "ul li:nth-child(3)",
+      "Filter": "\\s"
+    }
+  },
+  "Catalog": {
+    "DataType": "json",
+    "CatalogUrl": "https://www.bg3.co/novel/pagea/sancunrenjian-ergen_{{ .CatalogUrlParam }}.html",
+    "CatalogUrlParam": "chapter_id",
+    "Range": "body",
+    "NextFiltered": "pre",
+    "Find": "{",
+    "Title": {
+      "Type": "text",
+      "Rule": "chapter_name",
+      "Filter": "\\t|\\n"
+    },
+    "Url": {
+      "Type": "",
+      "Rule": "",
+      "Filter": ""
+    }
+  },
+  "Article": {
+    "Range": "div[class='frame_body']",
+    "Title": {
+      "Type": "text",
+      "Rule": "div h1",
+      "Filter": ""
+    },
+    "Doc": {
+      "Type": "text",
+      "Rule": "div[class='content']",
+      "Filter": "\\s"
+    }
+  }
+}
