@@ -143,3 +143,15 @@ autorestart=true
 `
 [作者：]|[\s]
 `
+## 配置文件说明
+
+
+**Rule字段的定义和用法**
+
+通过 css selector的定位进行数据提取。可以下载chrome的扩展程序[SelectorGadget](https://chrome.google.com/webstore/detail/selectorgadget/mhjhnkcfbdhnjickkkdbjoemdmbfginb/related?hl=zh-CN) 进行辅助选取。
+
+
+
+:nth-child(n) 选择器匹配属于其父元素的第 N 个子元素，不论元素的类型。
+
+n 可以是数字、关键词或公式。

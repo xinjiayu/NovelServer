@@ -14,7 +14,6 @@ function linux(){
 
     copyFile
     cp curl.sh bin/
-
     cp NovelServer bin/
 
     rm -f NovelServer
@@ -34,7 +33,6 @@ function mac(){
 
     copyFile
     cp curl.sh bin/
-
     cp NovelServer bin/
 
     rm -f NovelServer
