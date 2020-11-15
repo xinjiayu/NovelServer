@@ -126,14 +126,14 @@ autorestart=true
 
 `
 
-## 采用模板配置文件说明
+## 采集模板配置文件说明
 
 
 **Rule字段的定义和用法**
 
 通过 css selector的定位进行数据提取。可以下载chrome的扩展程序[SelectorGadget](https://chrome.google.com/webstore/detail/selectorgadget/mhjhnkcfbdhnjickkkdbjoemdmbfginb/related?hl=zh-CN) 进行辅助选取。
 
-**字段说：**
+**字段说明：**
 
 **`Range`：** 内容截取范围
 
