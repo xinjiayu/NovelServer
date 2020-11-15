@@ -5,6 +5,8 @@
 	ServerAgent = "NovelServer"
     DumpRouterMap    = false #是否打印路由信息
 
+    IndexFiles          = ["index.html","index.htm"]   # 自动首页静态文件检索。默认为["index.html", "index.htm"]
+
 [logger]
     path   = "./log"
     level  = "ALL"
