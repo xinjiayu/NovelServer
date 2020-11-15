@@ -7,12 +7,14 @@
 将网页版的小说解析成json格式API输出的模式。
 可以通过配置文件进行小说网站源的配置。
 
+[NovelServer API文档说明](https://docs.apipost.cn/view/1e517785a3282a91#3196964)
+
+
 ## 技术栈
 
 基础框架：[GoFrame](https://github.com/gogf/gf) 【 [中文文档](https://goframe.org/index) 】
 
 网页解析库：[goquery](https://github.com/PuerkitoBio/goquery)     
-
 
 ## 源码运行
 
@@ -118,40 +120,48 @@ autorestart=true
 5. 也可以使用`update`重新加载配置(默认不重启)，随后使用`start AssessServer启动指定的应用程序；
 6. 随后可以使用`status`指令查看当前`supervisor`管理的进程状态；
 
-## 配置文件
+## 应用配置文件
 
 在config中进行日志、数据库、服务端口及白名单等设置。配置实时生效。
 
-
-
-
-
-## 过滤正则说明：
-
-1、删除空行
-`
- \s
 `
 
-2、删除多余的汉字与空格及空行
-如：
-```
-作者：\n                                    \n                                        异乡说书人\n                                    \n                                
-```
-正则：
-
-`
-[作者：]|[\s]
-`
-## 配置文件说明
+## 采用模板配置文件说明
 
 
 **Rule字段的定义和用法**
 
 通过 css selector的定位进行数据提取。可以下载chrome的扩展程序[SelectorGadget](https://chrome.google.com/webstore/detail/selectorgadget/mhjhnkcfbdhnjickkkdbjoemdmbfginb/related?hl=zh-CN) 进行辅助选取。
 
+**字段说：**
 
+**`Range`：**内容截取范围
+**`Type`：**选择的类型，text,src,href,alt
+**`Rule`:** 选择的起点，如："div[class='bookname'] h1"
 
-:nth-child(n) 选择器匹配属于其父元素的第 N 个子元素，不论元素的类型。
+> :nth-child(n) 选择器匹配属于其父元素的第 N 个子元素，不论元素的类型。
+>
+> n 可以是数字、关键词或公式。
+>
 
-n 可以是数字、关键词或公式。
+**`Filter`:** 过滤器，采用正规选择。
+
+> **例：**
+>
+> 1、删除空行
+>
+> ```
+>  \s
+> ```
+>
+> 2、删除多余的汉字与空格及空行
+> 如：
+> ```
+> 作者：\n                                    \n                                        异乡说书人\n                                    \n                                
+> ```
+> 正则：
+>
+> ```
+> [作者：]|[\s]
+> ```
+
