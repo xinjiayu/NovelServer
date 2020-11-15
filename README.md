@@ -136,7 +136,9 @@ autorestart=true
 **字段说：**
 
 **`Range`：**内容截取范围
+
 **`Type`：**选择的类型，text,src,href,alt
+
 **`Rule`:** 选择的起点，如："div[class='bookname'] h1"
 
 > :nth-child(n) 选择器匹配属于其父元素的第 N 个子元素，不论元素的类型。
