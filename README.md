@@ -135,9 +135,9 @@ autorestart=true
 
 **字段说：**
 
-**`Range`：**内容截取范围
+**`Range`：** 内容截取范围
 
-**`Type`：**选择的类型，text,src,href,alt
+**`Type`：** 选择的类型，text,src,href,alt
 
 **`Rule`:** 选择的起点，如："div[class='bookname'] h1"
 
