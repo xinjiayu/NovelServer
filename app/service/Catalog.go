@@ -26,15 +26,14 @@ func (bs *BookService) BookCatalog(sourceCode, bookURL string) []model.BookCatal
 	glog.Info(bookURL)
 
 	//解析JSON数据
-
+	glog.Info("处理数据类型：", config.Catalog.DataType)
 	if config.Catalog.DataType == "json" {
 
 		jsonData := getRemoteJsonData(bookURL)
 		catalogList := jsonData.GetArray("items")
+		var bookCatalog model.BookCatalog
 		for _, data := range catalogList {
 			catalog := gconv.Map(data)
-			var bookCatalog model.BookCatalog
-
 			bookCatalog.SourcesCode = config.SourcesCode
 			//通过文字模板的处理，进行参数替换配置
 			paramDataMap := make(map[string]interface{})
@@ -54,7 +53,9 @@ func (bs *BookService) BookCatalog(sourceCode, bookURL string) []model.BookCatal
 				bookCatalog.Chapter = ci
 				catalogListData = append(catalogListData, bookCatalog)
 			}
+
 		}
+		go bs.updataCache(bookURL, bookCatalog)
 
 		return catalogListData
 	}
@@ -89,6 +90,7 @@ func (bs *BookService) BookCatalog(sourceCode, bookURL string) []model.BookCatal
 		})
 
 	}
+	go bs.updataCache(bookURL, bookCatalog)
 
 	return catalogListData
 }
@@ -136,6 +138,7 @@ func (bs *BookService) analysis(config *model.SourceConfig, s *goquery.Selection
 	//进行正则过滤处理
 	bookCatalog.Title = utils.NormFormat(bookCatalog.Title, config.Catalog.Title.Filter)
 	bookCatalog.Url = utils.NormFormat(bookCatalog.Url, config.Catalog.Url.Filter)
+
 	return
 }
 func getRemoteJsonData(webUrl string) *gjson.Json {
@@ -150,4 +153,14 @@ func getRemoteJsonData(webUrl string) *gjson.Json {
 		jsonData := gjson.New(r.ReadAllString())
 		return jsonData
 	}
+}
+
+func (bs *BookService) updataCache(bookURL string, bookCatalog model.BookCatalog) {
+	book := new(model.Book)
+	book.SourcesCode = bookCatalog.SourcesCode
+	book.Url = base64.URLEncoding.EncodeToString([]byte(bookURL))
+	book.LastTitle = bookCatalog.Title
+	book.LastUrl = bookCatalog.Url
+	glog.Info("补充的数据：", book)
+	bs.cacheBookInfo(book.Url, book)
 }

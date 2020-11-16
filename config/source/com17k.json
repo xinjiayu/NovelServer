@@ -62,7 +62,7 @@
       "Doc": {
         "Type": "text",
         "Rule": "div[class='p']",
-        "Filter": "\\t|\\n"
+        "Filter": "\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t"
       }
     }
 }

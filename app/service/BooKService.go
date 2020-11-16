@@ -11,6 +11,7 @@ type BookService struct {
 	formURL          string
 	SourceConfigInfo map[string]*model.SourceConfig
 	SourceList       []*model.Source
+	BookList         map[string]*model.Book
 }
 
 func NewSetupData() *BookService {
@@ -18,6 +19,7 @@ func NewSetupData() *BookService {
 	bookService := new(BookService)
 
 	bookService.SourceConfigInfo, bookService.SourceList = initSourceData()
+	bookService.BookList = make(map[string]*model.Book)
 
 	return bookService
 }

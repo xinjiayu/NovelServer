@@ -70,7 +70,7 @@
     "Doc": {
       "Type": "text",
       "Rule": "div[id='content']",
-      "Filter": "\\t|\\n"
+      "Filter": ""
     }
   }
 }

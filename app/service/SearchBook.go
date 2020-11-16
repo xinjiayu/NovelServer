@@ -10,7 +10,7 @@ import (
 )
 
 //SearchBook 搜索小说
-func (bs *BookService) SearchBook(sourceCode, bookName string) []model.Book {
+func (bs *BookService) SearchBook(sourceCode, bookName string) []*model.Book {
 
 	config := new(model.SourceConfig)
 	config = bs.SourceConfigInfo[sourceCode]
@@ -21,10 +21,10 @@ func (bs *BookService) SearchBook(sourceCode, bookName string) []model.Book {
 	doc := getHtmlDoc(webUrl)
 	glog.Info("SourceCode:", config.SourcesCode, webUrl)
 
-	var bookList []model.Book
+	var bookList []*model.Book
 	doc.Find(config.Search.DataRange).Each(func(i int, s *goquery.Selection) {
 
-		var book model.Book
+		var book = new(model.Book)
 
 		//d,_:=s.Html()
 		//glog.Info(d)
@@ -101,7 +101,9 @@ func (bs *BookService) SearchBook(sourceCode, bookName string) []model.Book {
 		book.BookId = base64.URLEncoding.EncodeToString([]byte(bookId))
 
 		if book.BookName != "" && book.Url != "" {
-			bookList = append(bookList, book)
+			bs.cacheBookInfo(book.Url, book)
+			bookInfo := bs.BookInfo(book.Url) //从缓存中取修正后的小说信息
+			bookList = append(bookList, bookInfo)
 		}
 
 	})
@@ -110,11 +112,11 @@ func (bs *BookService) SearchBook(sourceCode, bookName string) []model.Book {
 }
 
 //SearchBookByMultiSource 按名子搜索多个源
-func (bs *BookService) SearchBookByMultiSource(bookName, author string) map[string]model.Book {
+func (bs *BookService) SearchBookByMultiSource(bookName, author string) map[string]*model.Book {
 	bookId := bookName + "|" + author
 	bookId = base64.URLEncoding.EncodeToString([]byte(bookId))
 
-	var bookList = make(map[string]model.Book)
+	var bookList = make(map[string]*model.Book)
 
 	for _, config := range bs.SourceList {
 		glog.Info(config.SourcesCode)
@@ -122,7 +124,7 @@ func (bs *BookService) SearchBookByMultiSource(bookName, author string) map[stri
 		dataList := bs.SearchBook(config.SourcesCode, bookName)
 		for _, book := range dataList {
 			if book.BookId == bookId {
-				bookList[config.SourcesCode] = book
+				bookList[config.SourcesCode] = bs.BookList[book.Url]
 			}
 		}
 
